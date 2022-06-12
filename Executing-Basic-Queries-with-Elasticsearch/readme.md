@@ -563,5 +563,89 @@ GET accounts/_search
   }
 }
 ```
+---------
+
+- Fuzzy Query
+
+```sh
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "city": "edenburg"
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "fuzzy": {
+      "city": "edenburg"
+    }
+  }
+}
+```
+
+Response:
+```json
+{
+  "took" : 14,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
+    },
+    "max_score" : 6.5059485,
+    "hits" : [
+      {
+        "_index" : "accounts",
+        "_id" : "4wgpWYEB6dOIqGzjArQ5",
+        "_score" : 6.5059485,
+        "_source" : {
+          "account_number" : 397,
+          "balance" : 37418,
+          "firstname" : "Leonard",
+          "lastname" : "Gray",
+          "age" : 36,
+          "gender" : "F",
+          "address" : "840 Morgan Avenue",
+          "employer" : "Recritube",
+          "email" : "leonardgray@recritube.com",
+          "city" : "Edenburg",
+          "state" : "AL"
+        }
+      },
+      {
+        "_index" : "accounts",
+        "_id" : "KwgpWYEB6dOIqGzjArs-",
+        "_score" : 5.692705,
+        "_source" : {
+          "account_number" : 419,
+          "balance" : 34847,
+          "firstname" : "Helen",
+          "lastname" : "Montoya",
+          "age" : 29,
+          "gender" : "F",
+          "address" : "736 Kingsland Avenue",
+          "employer" : "Hairport",
+          "email" : "helenmontoya@hairport.com",
+          "city" : "Edinburg",
+          "state" : "NE"
+        }
+      }
+    ]
+  }
+}
+
+```
 
 
+-------------
