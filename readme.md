@@ -33,6 +33,8 @@ mv kibana-8.2.2 kibana
 
 cd kibana
 
+xattr -d -r com.apple.quarantine kibana
+
 bin/kibana
 ```
 
