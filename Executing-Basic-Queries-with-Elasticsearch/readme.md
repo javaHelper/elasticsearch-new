@@ -419,3 +419,58 @@ Response:
 }
 
 ```
+--------------
+
+```json
+GET accounts/_search
+{
+  "query": {
+    "match_phrase": {
+      "address": "Sedgwick street"
+    }
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "took" : 43,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 6.9447823,
+    "hits" : [
+      {
+        "_index" : "accounts",
+        "_id" : "XQgpWYEB6dOIqGzjArQ5",
+        "_score" : 6.9447823,
+        "_source" : {
+          "account_number" : 63,
+          "balance" : 6077,
+          "firstname" : "Hughes",
+          "lastname" : "Owens",
+          "age" : 30,
+          "gender" : "F",
+          "address" : "510 Sedgwick Street",
+          "employer" : "Valpreal",
+          "email" : "hughesowens@valpreal.com",
+          "city" : "Guilford",
+          "state" : "KS"
+        }
+      }
+    ]
+  }
+}
+```
+---------
