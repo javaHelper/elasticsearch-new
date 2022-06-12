@@ -58,7 +58,7 @@ Response:
 }
 
 ```
-
+-------------------------------------------
 ```json
 GET accounts/_search
 {
@@ -272,4 +272,150 @@ Response:
     ]
   }
 }
+```
+----------------------------
+
+```json
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "firstname": "huff dale"
+    }
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
+    },
+    "max_score" : 6.5032897,
+    "hits" : [
+      {
+        "_index" : "accounts",
+        "_id" : "SwgpWYEB6dOIqGzjArQ5",
+        "_score" : 6.5032897,
+        "_source" : {
+          "account_number" : 18,
+          "balance" : 4180,
+          "firstname" : "Dale",
+          "lastname" : "Adams",
+          "age" : 33,
+          "gender" : "M",
+          "address" : "467 Hutchinson Court",
+          "employer" : "Boink",
+          "email" : "daleadams@boink.com",
+          "city" : "Orick",
+          "state" : "MD"
+        }
+      },
+      {
+        "_index" : "accounts",
+        "_id" : "9QgpWYEB6dOIqGzjArQ5",
+        "_score" : 6.5032897,
+        "_source" : {
+          "account_number" : 443,
+          "balance" : 7588,
+          "firstname" : "Huff",
+          "lastname" : "Thomas",
+          "age" : 23,
+          "gender" : "M",
+          "address" : "538 Erskine Loop",
+          "employer" : "Accufarm",
+          "email" : "huffthomas@accufarm.com",
+          "city" : "Corinne",
+          "state" : "AL"
+        }
+      }
+    ]
+  }
+}
+
+```
+----------------------------------------------------
+```json
+GET accounts/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "ford",
+      "fields": ["firstname", "address"]
+    }
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "took" : 0,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
+    },
+    "max_score" : 6.5032897,
+    "hits" : [
+      {
+        "_index" : "accounts",
+        "_id" : "rwgpWYEB6dOIqGzjArs-",
+        "_score" : 6.5032897,
+        "_source" : {
+          "account_number" : 748,
+          "balance" : 38060,
+          "firstname" : "Ford",
+          "lastname" : "Branch",
+          "age" : 25,
+          "gender" : "M",
+          "address" : "926 Cypress Avenue",
+          "employer" : "Buzzness",
+          "email" : "fordbranch@buzzness.com",
+          "city" : "Beason",
+          "state" : "DC"
+        }
+      },
+      {
+        "_index" : "accounts",
+        "_id" : "4QgpWYEB6dOIqGzjArQ5",
+        "_score" : 6.501515,
+        "_source" : {
+          "account_number" : 392,
+          "balance" : 31613,
+          "firstname" : "Dotson",
+          "lastname" : "Dean",
+          "age" : 35,
+          "gender" : "M",
+          "address" : "136 Ford Street",
+          "employer" : "Petigems",
+          "email" : "dotsondean@petigems.com",
+          "city" : "Chical",
+          "state" : "SD"
+        }
+      }
+    ]
+  }
+}
+
 ```
