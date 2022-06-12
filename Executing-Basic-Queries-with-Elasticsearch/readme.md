@@ -529,3 +529,39 @@ GET accounts/_search
   }
 }
 ```
+-------------------------
+
+- Modify scoring in elastic search
+
+```json
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "address": "street"
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "boosting": {
+      "positive": {
+        "term": {
+          "address": "street"
+        }
+      },
+      "negative": {
+        "term": {
+          "address": "madison"
+          
+        }
+      },
+      "negative_boost": 0.2
+    }
+  }
+}
+```
+
+
