@@ -474,3 +474,18 @@ Response:
 }
 ```
 ---------
+
+- Wild Card
+
+```json
+GET accounts/_search
+{
+  "query": {
+    "wildcard": {
+      "firstname": {
+        "value": "h*ll"
+      }
+    }
+  }
+}
+```
