@@ -489,3 +489,43 @@ GET accounts/_search
   }
 }
 ```
+- Compund Queries
+
+```sh
+GET accounts/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "term": {"address" : "street"}        
+      }
+    }
+  }
+}
+
+
+GET accounts/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "term" : {"gender": "M"   }     
+      }
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "term" : {"address": "street"   }     
+      },
+      "must_not": {
+        "term" : { "age" : "27"}
+      }
+    }
+  }
+}
+```
