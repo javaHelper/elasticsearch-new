@@ -646,6 +646,41 @@ Response:
 }
 
 ```
-
-
 -------------
+
+- Range DSL Query
+
+```json
+GET accounts/_search
+{
+  "query": {
+    "range": {
+      "balance": {
+        "gte": 10000
+      }
+    }
+  }
+}
+
+
+GET accounts/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "range" : {
+          "age" : {
+            "gte" : 30,
+            "lte" : 40
+          }
+        }
+      },
+      "must_not": {
+        "term": {
+          "state" : "il"
+        }
+      }
+    }
+  }
+}
+```
