@@ -197,3 +197,115 @@ PUT /alerts-index/_doc/1
 }
 ```
 
+```json
+GET /alerts-index/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "took" : 918,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "alerts-index",
+        "_id" : "1",
+        "_score" : 1.0,
+        "_source" : {
+          "threashold" : 125,
+          "query" : {
+            "bool" : {
+              "must" : {
+                "query_string" : {
+                  "default_field" : "query-field",
+                  "query" : "price:>100"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+```json
+GET /alerts-index/_search
+{
+  "query": {
+    "percolate": {
+      "field": "query",
+      "document": {
+        "price": 150
+      }
+    }
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "took" : 31,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "alerts-index",
+        "_id" : "1",
+        "_score" : 1.0,
+        "_source" : {
+          "threashold" : 125,
+          "query" : {
+            "bool" : {
+              "must" : {
+                "query_string" : {
+                  "default_field" : "query-field",
+                  "query" : "price:>100"
+                }
+              }
+            }
+          }
+        },
+        "fields" : {
+          "_percolator_document_slot" : [
+            0
+          ]
+        }
+      }
+    ]
+  }
+}
+
+```
