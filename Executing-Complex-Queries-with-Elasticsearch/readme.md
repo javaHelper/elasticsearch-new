@@ -61,3 +61,63 @@ GET kibana_sample_data_ecommerce/_settings
   }
 }
 ```
+--------
+
+```json
+PUT geo-index
+{
+  "mappings": {
+    "properties": {
+      "geo": {
+        "type": "nested"
+      }
+    }
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "geo-index"
+}
+```
+
+```json
+PUT geo-index/_doc/1
+{
+  "group" : "customers",
+  "geo" : [
+    {
+      "city" : "Boston",
+      "state": "Massachusetts"
+    },
+    {
+      "city" : "Atlanta",
+      "state": "Georgia"
+    }
+  ]
+}
+```
+
+Response:
+
+```json
+{
+  "_index" : "geo-index",
+  "_id" : "1",
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 0,
+  "_primary_term" : 1
+}
+
+```
