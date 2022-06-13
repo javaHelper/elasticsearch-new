@@ -136,6 +136,8 @@ Response:
 }
 ```
 
+# Nested Queries
+
 ```json
 GET geo-index/_search
 {
@@ -156,4 +158,42 @@ GET geo-index/_search
 
 ```
 
+# Percololated Queries
+
+```json
+PUT /alerts-index
+{
+  "mappings": {
+    "properties": {
+      "threashold" : {
+        "type": "long"
+      },
+      "price" : {
+        "type": "long"
+      },
+      "query": {
+        "type" : "percolator"
+      }
+    }
+  }
+}
+```
+
+
+```json
+PUT /alerts-index/_doc/1
+{
+  "threashold" : 125,
+  "query": {
+    "bool": {
+      "must" : {
+        "query_string" : {
+          "default_field": "query-field",
+          "query": "price:>100"
+        }
+      }
+    }
+  }
+}
+```
 
