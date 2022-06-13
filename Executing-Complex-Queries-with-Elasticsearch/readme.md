@@ -134,5 +134,26 @@ Response:
   "_seq_no" : 0,
   "_primary_term" : 1
 }
+```
+
+```json
+GET geo-index/_search
+{
+  "query": {
+    "nested": {
+      "path": "geo",
+      "query": {
+        "bool": {
+          "must": [
+            {"match": { "geo.city": "Boston" }},
+            {"match": { "geo.state": "Massachusetts" }}
+          ]
+        }
+      }
+    }
+  }
+}
 
 ```
+
+
