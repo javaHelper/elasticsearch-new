@@ -309,3 +309,50 @@ Response:
 }
 
 ```
+---------
+
+```json
+GET /kibana_sample_data_ecommerce/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "geoip.continent_name": "North America"
+          }
+        },
+        {
+          "match": {
+            "manufacturer": "Low Time Media"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+Response:
+
+```json
+GET /kibana_sample_data_ecommerce/_search
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "customer_gender": "MALE"
+          }
+        },
+        {
+          "term": {
+            "geoip.continent_name": "North America"
+          }
+        }
+      ]
+    }
+  }
+}
+```
