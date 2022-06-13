@@ -101,6 +101,21 @@ PUT geo-index/_doc/1
     }
   ]
 }
+
+PUT geo-index/_doc/2
+{
+  "group" : "customers",
+  "geo" : [
+    {
+      "city" : "Denver",
+      "state": "Colorado"
+    },
+    {
+      "city" : "Jackson",
+      "state": "Mississippi"
+    }
+  ]
+}
 ```
 
 Response:
